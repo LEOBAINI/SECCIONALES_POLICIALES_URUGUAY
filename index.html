@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<base target="_top">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Quick Start - Leaflet</title>
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.2/dist/leaflet.css" integrity="sha256-sA+zWATbFveLLNqWO2gtiw3HL/lh1giY/Inf1BJ0z14=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.2/dist/leaflet.js" integrity="sha256-o9N1jGDZrf5tS+Ft4gbIK7mYMipq9lqpVJ91xHSyKhg=" crossorigin=""></script>
+    <script src=seccionales.js></script>
+
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		.leaflet-container {
+			height: 400px;
+			width: 600px;
+			max-width: 100%;
+			max-height: 100%;
+		}
+	</style>
+
+	
+</head>
+<body>
+
+
+
+<div id="map" style="width: 1200px; height: 800px;"></div>
+<script>
+   
+   
+
+
+    function isMarkerInsidePolygon(marker, poly) {
+    var inside = false;
+    var x = marker.getLatLng().lat, y = marker.getLatLng().lng;
+    for (var ii=0;ii<poly.getLatLngs().length;ii++){
+        var polyPoints = poly.getLatLngs()[ii];
+        for (var i = 0, j = polyPoints.length - 1; i < polyPoints.length; j = i++) {
+            var xi = polyPoints[i].lat, yi = polyPoints[i].lng;
+            var xj = polyPoints[j].lat, yj = polyPoints[j].lng;
+
+            var intersect = ((yi > y) != (yj > y))
+                && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
+            if (intersect) inside = !inside;
+        }
+    }
+
+    return inside;
+};
+	var map = L.map('map').setView([-34.902741, -56.166995], 13);
+
+	var tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+		maxZoom: 19,
+		attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+	}).addTo(map);
+
+    var seccional_1=L.polygon(seccionales.seccional1.coordenadas).addTo(map);
+   // seccionales.seccional1.etiquetar();
+  
+           
+
+    var seccional_2=L.polygon(seccionales.seccional2.coordenadas).addTo(map);
+
+    var seccional_3=L.polygon(seccionales.seccional3.coordenadas).addTo(map);
+
+    var seccional_4=L.polygon(seccionales.seccional4.coordenadas).addTo(map);
+
+    var seccional_5=L.polygon(seccionales.seccional5.coordenadas).addTo(map);
+   
+    var seccional_6 = L.polygon(seccionales.seccional6.coordenadas).addTo(map);
+
+    var seccional_7 = L.polygon(seccionales.seccional7.coordenadas).addTo(map);
+
+    var seccional_8 = L.polygon(seccionales.seccional8.coordenadas).addTo(map);
+    
+    var seccional_9=L.polygon(seccionales.seccional9.coordenadas).addTo(map);
+
+    var seccional_10=L.polygon(seccionales.seccional10.coordenadas).addTo(map);
+
+    var seccional_11=L.polygon(seccionales.seccional11.coordenadas).addTo(map);
+
+    var seccional_12=L.polygon(seccionales.seccional12.coordenadas).addTo(map);
+
+    var seccional_13=L.polygon(seccionales.seccional13.coordenadas).addTo(map);
+
+    var seccional_14=L.polygon(seccionales.seccional14.coordenadas).addTo(map);
+
+    var seccional_15=L.polygon(seccionales.seccional15.coordenadas).addTo(map);
+
+    var seccional_16=L.polygon(seccionales.seccional16.coordenadas).addTo(map);
+
+    var seccional_17=L.polygon(seccionales.seccional17.coordenadas).addTo(map);
+
+    var seccional_18=L.polygon(seccionales.seccional18.coordenadas).addTo(map);
+
+    var seccional_19=L.polygon(seccionales.seccional19.coordenadas).addTo(map);
+
+    var seccional_20=L.polygon(seccionales.seccional20.coordenadas).addTo(map);
+
+    var seccional_21=L.polygon(seccionales.seccional21.coordenadas).addTo(map);
+
+    var seccional_22=L.polygon(seccionales.seccional22.coordenadas).addTo(map);
+
+    var seccional_23=L.polygon(seccionales.seccional23.coordenadas).addTo(map);
+
+    var seccional_24=L.polygon(seccionales.seccional24.coordenadas).addTo(map);
+
+    var seccional_25=L.polygon(seccionales.seccional25.coordenadas).addTo(map);
+
+
+    
+
+
+ var m1 = L.marker( [-34.924828, -56.160874]); 
+
+
+  m1.addTo(map);
+ 
+  var flag=0;
+  var _seccionales=Object.keys(seccionales);
+  _seccionales.forEach(element => {
+    
+    if(isMarkerInsidePolygon(m1,L.polygon(seccionales[element].coordenadas))){
+        console.log('Corresponde a seccional '+seccionales[element].id);
+        flag=1;
+
+    }
+          poligono=L.polygon(seccionales[element].coordenadas).addTo(map);
+            label1 = L.tooltip({ permanent: true }); //permanent:true se encarga de mostrar el tooltip en todo momento 
+            label1.setContent(seccionales[element].nombre);
+            label1.setLatLng(poligono.getBounds().getCenter());
+            poligono.bindTooltip(label1);
+
+   
+ });
+ if (flag==0){
+    console.log('No esta dentro de seccional valida');
+ }
+  /*
+  console.log(isMarkerInsidePolygon(m1,seccional_1));
+  // ==> si
+  console.log(isMarkerInsidePolygon(m1,seccional_9));
+  // ==> no
+  console.log(isMarkerInsidePolygon(m1,seccional_3));
+  // ==> no
+  console.log(isMarkerInsidePolygon(m4,polygon));*/
+  //console.log(_seccionales);
+
+
+
+</script>
+
+
+
+</body>
+</html>
